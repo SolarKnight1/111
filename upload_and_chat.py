@@ -376,7 +376,10 @@ def upload_temp_docs():
     finally:
         # 确保在发生异常时关闭临时文件
         temp_file.close()
-
+        
+    return send_file(byte_stream, as_attachment=True,
+                         download_name="result{}.txt".format(uploaded_file.filename.split('\\')[-1]).replace('.pdf',
+                                                                                                             ''))
 
 import atexit
 # 注册一个函数，在程序退出时删除临时文件
